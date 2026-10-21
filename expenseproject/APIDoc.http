@@ -1,0 +1,230 @@
+
+#-------CREATE USER-----------
+
+###
+POST http://127.0.0.1:8000/user/create
+Content-Type: application/json
+
+{
+    "username":"Arun",
+    "email":"arun@gmail.com",
+    "password":"password@123"
+}
+
+
+###
+POST http://127.0.0.1:8000/user/create
+Content-Type: application/json
+
+{
+    "username":"Arjun",
+    "email":"arjun@gmail.com",
+    "password":"password@abc"
+}
+
+
+#--------EXPENSE VIEWS-------------
+
+#CREATE EXPENSES
+###
+POST http://127.0.0.1:8000/exp/create
+Content-Type: application/json
+Authorization: Basic Arjun:password@abc
+
+{
+    "title":"Day1",
+    "amount":"1000",
+    "category":"food",
+    "payment":"UPI"
+}
+
+
+###
+POST http://127.0.0.1:8000/exp/create
+Content-Type: application/json
+Authorization: Basic Arjun:password@abc
+
+{
+    "title":"Day2",
+    "amount":"2000",
+    "category":"fuel",
+    "payment":"card"
+}
+
+
+###
+POST http://127.0.0.1:8000/exp/create
+Content-Type: application/json
+Authorization: Basic Arjun:password@abc
+
+{
+    "title":"Day3",
+    "amount":"5000",
+    "category":"bill",
+    "payment":"UPI"
+}
+
+
+###
+POST http://127.0.0.1:8000/exp/create
+Content-Type: application/json
+Authorization: Basic Arun:password@123
+
+{
+    "title":"Expense1",
+    "amount":"1500",
+    "category":"food",
+    "payment":"card"
+}
+
+###
+POST http://127.0.0.1:8000/exp/create
+Content-Type: application/json
+Authorization: Basic Arun:password@123
+
+{
+    "title":"Expense2",
+    "amount":"3000",
+    "category":"fuel",
+    "payment":"UPI"
+}
+
+###
+POST http://127.0.0.1:8000/exp/create
+Content-Type: application/json
+Authorization: Basic Arun:password@123
+
+{
+    "title":"Expense3",
+    "amount":"10000",
+    "category":"bill",
+    "payment":"card"
+}
+
+
+###
+POST http://127.0.0.1:8000/exp/create
+Content-Type: application/json
+Authorization: Basic Arun:password@123
+
+{
+    "title":"Expense4",
+    "amount":"2000",
+    "category":"food",
+    "payment":"UPI"
+}
+
+
+#LIST EXPENSES
+###
+GET http://127.0.0.1:8000/exp/create
+Authorization: Basic Arun:password@123
+
+
+###
+GET http://127.0.0.1:8000/exp/create
+Authorization: Basic Arjun:password@abc
+
+
+#RETRIEVE
+###
+GET http://127.0.0.1:8000/exp/details/3
+Authorization: Basic Arjun:password@abc
+
+
+###
+GET http://127.0.0.1:8000/exp/details/4
+Authorization: Basic Arun:password@123
+
+
+
+#UPDATE
+###
+PUT http://127.0.0.1:8000/exp/details/3
+Content-Type: application/json
+Authorization: Basic Arjun:password@abc
+
+{
+  "id": 3,
+  "title": "Day3",
+  "amount": "6000.00",
+  "created_at": "2026-10-16T16:11:06.361808Z",
+  "category": "bill",
+  "payment": "card",
+  "owner": 2
+}
+
+
+###
+PUT http://127.0.0.1:8000/exp/details/5
+Content-Type: application/json
+Authorization: Basic Arun:password@123
+
+{
+    "id": 5,
+    "title": "Expense2",
+    "amount": "2500.00",
+    "created_at": "2026-10-16T16:12:25.430503Z",
+    "category": "fuel",
+    "payment": "UPI",
+    "owner": 1
+}
+
+
+#DELETE
+###
+DELETE http://127.0.0.1:8000/exp/details/7
+Content-Type: application/json
+Authorization: Basic Arun:password@123
+
+
+#------FILTERING,SEARCHING,ORDERING-----------
+
+#SEARCHING
+###
+GET http://127.0.0.1:8000/exp/create?search=Day1
+Authorization: Basic Arjun:password@abc
+
+
+###
+GET http://127.0.0.1:8000/exp/create?search=Expense2
+Authorization: Basic Arun:password@123
+
+
+#ORDERING
+###
+GET http://127.0.0.1:8000/exp/create?ordering=created_at
+Authorization: Basic Arun:password@123
+
+
+###
+GET http://127.0.0.1:8000/exp/create?ordering=created_at
+Authorization: Basic Arjun:password@abc
+
+###
+GET http://127.0.0.1:8000/exp/create?ordering=-created_at
+Authorization: Basic Arjun:password@abc
+
+
+###
+GET http://127.0.0.1:8000/exp/create?ordering=amount
+Authorization: Basic Arun:password@123
+
+###
+GET http://127.0.0.1:8000/exp/create?ordering=-amount
+Authorization: Basic Arun:password@123
+
+
+###
+GET http://127.0.0.1:8000/exp/create?ordering=amount
+Authorization: Basic Arjun:password@abc
+
+
+#FILTERING
+###
+GET http://127.0.0.1:8000/exp/create?category=food&payment=UPI
+Authorization: Basic Arjun:password@abc
+
+###
+GET http://127.0.0.1:8000/exp/create?category=bill&payment=card
+Authorization: Basic Arun:password@123
